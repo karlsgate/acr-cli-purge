@@ -26,12 +26,12 @@ jobs:
           username: ${{ secrets.ACR_USERNAME }}
           password: ${{ secrets.ACR_PASSWORD }}
           repo: 'myrepo'
-          tag-regex: 'v[0-9]+'
-          repo-regex: 'myrepo'
-          days-to-keep: '30'
+          tag_regex: 'v[0-9]+'
+          repo_regex: 'myrepo'
+          ago: '30d'
           keep: '5'
-          dry-run: true
-          delete-untagged: true
+          dry_run: true
+          delete_untagged: true
 ```
 
 ### Required Inputs
@@ -47,12 +47,12 @@ jobs:
 | Key               | Description                                                                                                  |
 |-------------------|--------------------------------------------------------------------------------------------------------------|
 | `repo`            | The name of the ACR repository to clean up (default: 'all')                                                  |
-| `tag-regex`       | A regex pattern to match tags for deletion (default: `.*`)                                                   |
-| `repo-regex`      | A regex pattern to match repositories for deletion (only used if `repo` is not specified; default: `.*`)     |
+| `tag_regex`       | A regex pattern to match tags for deletion (default: `.*`)                                                   |
+| `repo_regex`      | A regex pattern to match repositories for deletion (only used if `repo` is not specified; default: `.*`)     |
 | `ago`             | The time granularity to retain tags (default: 30d which is 30 days)                                          |
 | `keep`            | The number of tags to keep, even if they meet the deletion criteria (default: 3)                             |
-| `dry-run`         | If set to `true`, the action will only print the tags that would be deleted (default: `false`)               |
-| `delete-untagged` | If set to `true`, the action will delete untagged manifests (default: `false`)                               |
+| `dry_run`         | If set to `true`, the action will only print the tags that would be deleted (default: `false`)               |
+| `delete_untagged` | If set to `true`, the action will delete untagged manifests (default: `false`)                               |
 
 ## License
 
