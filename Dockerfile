@@ -2,6 +2,8 @@ FROM alpine:latest
 
 ENV ACR_CLI_VERSION=0.11
 
+RUN apk add --no-cache shadow
+
 RUN groupadd -r acruser && useradd -r -g acruser acruser
 
 WORKDIR /home/acruser
