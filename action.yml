@@ -1,0 +1,58 @@
+name: 
+description:
+author: 'Yassir Oulmokhtar <yassir.oulmokhtar@karlsgate.com>'
+branding:
+  icon: 'trash-2'  
+  color: 'blue'
+inputs:
+  registry:
+    description: 'The name of the Azure Container Registry (ACR) to clean up'
+    required: true
+  username: 
+    description: 'The username to authenticate with the Azure Container Registry'
+    required: true
+  password:
+    description: 'The password to authenticate with the Azure Container Registry'
+    required: true
+  repo:
+    description: 'The name of the ACR repository to clean up'
+    required: false
+    default: 'all'
+  tag-regex:
+    description: 'The regex to match tags to delete. Default is all tags'
+    required: false
+    default: '.*'
+  repo-regex:
+    description: 'The regex to match repositories to delete. Default is all repositories. Only used if repo is not specified'
+    required: false
+    default: '.*'
+  days-to-keep:
+    description: 'The number of days to keep tags. Default is 30 days'
+    default: '30'
+  keep:
+    description: 'The number of tags to keep even if they meet the criteria. Default is 3' 
+    required: false
+    default: '3'
+  dry-run:
+    description: 'If true, the action will only print the tags that would be deleted' 
+    required: false
+    default: false
+  delete-untagged:
+    description: 'If true, the action will delete untagged manifests (meaning no tags point to them)'
+    required: false
+    default: false
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  env:
+    DRYRUN: ${{ inputs.dry-run }}
+    UNTAGGED: ${{ inputs.delete-untagged }}
+  args:
+    - ${{ inputs.registry }}
+    - ${{ inputs.username }}
+    - ${{ inputs.password }}
+    - ${{ inputs.repo }}
+    - ${{ inputs.tag-regex }}
+    - ${{ inputs.repo-regex }}
+    - ${{ inputs.days-to-keep }}
+    - ${{ inputs.keep }}
