@@ -39,7 +39,7 @@ fi
 echo "Starting ACR cleanup for registry ${INPUT_REGISTRY}..."
 
 if ! acr purge -r "$INPUT_REGISTRY" \
-    --ago "${AGO}d" \
+    --ago "$AGO" \
     --keep "$KEEP" \
     --filter "$FILTER" \
     $( [ "$DRY_RUN" = true ] && echo "--dry-run" ) \
