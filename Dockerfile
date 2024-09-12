@@ -2,7 +2,6 @@ FROM alpine:latest
 
 ENV ACR_CLI_VERSION=0.11
 
-RUN chown acruser:acruser /home/acruser
 
 RUN echo "Installing acr-cli version $ACR_CLI_VERSION" \
     && mkdir -p /tmp/acr-cli \
@@ -12,8 +11,7 @@ RUN echo "Installing acr-cli version $ACR_CLI_VERSION" \
     && mv /tmp/acr-cli/acr /usr/local/bin/ \
     && rm -rf /tmp/acr-cli/
 
-COPY entrypoint.sh /home/acruser/entrypoint.sh
-RUN chmod +x /home/acruser/entrypoint.sh \
-    && chown acruser:acruser /home/acruser/entrypoint.sh
+COPY entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
 
-ENTRYPOINT ["/home/acruser/entrypoint.sh"]
+ENTRYPOINT ["/entrypoint.sh"]
