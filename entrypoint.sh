@@ -36,26 +36,14 @@ if ! echo $INPUT_PASSWORD | acr login --username "$INPUT_USERNAME" --password-st
 fi
 
 # Run the acr-cli command with error handling
-echo "Starting ACR cleanup for registry ${INPUT_REGISTRY} for ..."
-echo "  Registry: ${INPUT_REGISTRY}"
-echo "  Username: ${INPUT_USERNAME}"
-echo "  Password: ***"
-echo "  Repository: ${REPO}"
-echo "  Tag Regex: ${TAG_REGEX}"
-echo "  Repository Regex: ${REPO_REGEX}"
-echo "  Ago: ${AGO}"
-echo "  Keep: ${KEEP}"
-echo "  Dry Run: ${DRY_RUN}"
-echo "  Delete Untagged: ${DELETE_UNTAGGED}"
-
-echo "  Filter: ${FILTER}"
+echo "Starting ACR cleanup for registry ${INPUT_REGISTRY}..."
 
 if ! acr purge -r "$INPUT_REGISTRY" \
     --ago "${AGO}d" \
     --keep "$KEEP" \
     --filter "$FILTER" \
     $( [ "$DRY_RUN" = true ] && echo "--dry-run" ) \
-    $( [ "$DELETE_UNTAGGED" = true ] && echo "--delete-untagged" ); then
+    $( [ "$DELETE_UNTAGGED" = true ] && echo "--untagged" ); then
   log_error_and_exit "Failed to execute ACR cleanup"
 fi
 
