@@ -26,9 +26,9 @@ inputs:
     description: 'The regex to match repositories to delete. Default is all repositories. Only used if repo is not specified'
     required: false
     default: '.*'
-  days-to-keep:
-    description: 'The number of days to keep tags. Default is 30 days'
-    default: '30'
+  ago:
+    description: 'The number of days to keep tags. Default is 30 days (30d)'
+    default: '30d'
   keep:
     description: 'The number of tags to keep even if they meet the criteria. Default is 3' 
     required: false
@@ -44,9 +44,6 @@ inputs:
 runs:
   using: 'docker'
   image: 'Dockerfile'
-  env:
-    DRYRUN: ${{ inputs.dry-run }}
-    UNTAGGED: ${{ inputs.delete-untagged }}
   args:
     - ${{ inputs.registry }}
     - ${{ inputs.username }}
@@ -54,5 +51,7 @@ runs:
     - ${{ inputs.repo }}
     - ${{ inputs.tag-regex }}
     - ${{ inputs.repo-regex }}
-    - ${{ inputs.days-to-keep }}
+    - ${{ inputs.ago }}
     - ${{ inputs.keep }}
+    - ${{ inputs.dry-run }}
+    - ${{ inputs.delete-untagged }}

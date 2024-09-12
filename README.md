@@ -49,7 +49,7 @@ jobs:
 | `repo`            | The name of the ACR repository to clean up (default: 'all')                                                  |
 | `tag-regex`       | A regex pattern to match tags for deletion (default: `.*`)                                                   |
 | `repo-regex`      | A regex pattern to match repositories for deletion (only used if `repo` is not specified; default: `.*`)     |
-| `days-to-keep`    | The number of days to retain tags (default: 30 days)                                                         |
+| `ago`             | The time granularity to retain tags (default: 30d which is 30 days)                                          |
 | `keep`            | The number of tags to keep, even if they meet the deletion criteria (default: 3)                             |
 | `dry-run`         | If set to `true`, the action will only print the tags that would be deleted (default: `false`)               |
 | `delete-untagged` | If set to `true`, the action will delete untagged manifests (default: `false`)                               |
