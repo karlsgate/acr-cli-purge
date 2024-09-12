@@ -25,7 +25,6 @@ jobs:
           registry: myRegistry
           username: ${{ secrets.ACR_USERNAME }}
           password: ${{ secrets.ACR_PASSWORD }}
-          tenant: ${{ secrets.AZURE_TENANT }}
           repo: 'myrepo'
           tag-regex: 'v[0-9]+'
           repo-regex: 'myrepo'
