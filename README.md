@@ -18,7 +18,7 @@ jobs:
   cleanup:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
       - name: ACR Purge
         uses: karlsgate/acr-cli-purge@v1
         with:
