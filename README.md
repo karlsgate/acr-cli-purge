@@ -19,8 +19,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: ACR Cleanup
-        uses: karlsgate/acr-cleanup@v1
+      - name: ACR Purge
+        uses: karlsgate/acr-cli-purge@v1
         with:
           registry: myRegistry
           username: ${{ secrets.ACR_USERNAME }}
