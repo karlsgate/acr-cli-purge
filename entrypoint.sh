@@ -14,7 +14,7 @@ log_error_and_exit() {
 [ -z "${INPUT_PASSWORD}" ] && log_error_and_exit "Password input is required"
 
 # Set optional inputs with defaults
-REPO="${INPUT_REPO:-}"
+REPO="${INPUT_REPO:-all}"
 TAG_REGEX="${INPUT_TAG_REGEX:-.*}"
 REPO_REGEX="${INPUT_REPO_REGEX:-.*}"
 AGO="${INPUT_AGO:-30d}"

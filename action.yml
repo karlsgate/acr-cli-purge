@@ -18,11 +18,11 @@ inputs:
     description: 'The name of the ACR repository to clean up'
     required: false
     default: 'all'
-  tag-regex:
+  tag_regex:
     description: 'The regex to match tags to delete. Default is all tags'
     required: false
     default: '.*'
-  repo-regex:
+  repo_regex:
     description: 'The regex to match repositories to delete. Default is all repositories. Only used if repo is not specified'
     required: false
     default: '.*'
@@ -33,11 +33,11 @@ inputs:
     description: 'The number of tags to keep even if they meet the criteria. Default is 3' 
     required: false
     default: '3'
-  dry-run:
+  dry_run:
     description: 'If true, the action will only print the tags that would be deleted' 
     required: false
     default: false
-  delete-untagged:
+  delete_untagged:
     description: 'If true, the action will delete untagged manifests (meaning no tags point to them)'
     required: false
     default: false
@@ -49,9 +49,9 @@ runs:
     - ${{ inputs.username }}
     - ${{ inputs.password }}
     - ${{ inputs.repo }}
-    - ${{ inputs.tag-regex }}
-    - ${{ inputs.repo-regex }}
+    - ${{ inputs.tag_regex }}
+    - ${{ inputs.repo_regex }}
     - ${{ inputs.ago }}
     - ${{ inputs.keep }}
-    - ${{ inputs.dry-run }}
-    - ${{ inputs.delete-untagged }}
+    - ${{ inputs.dry_run }}
+    - ${{ inputs.delete_untagged }}
