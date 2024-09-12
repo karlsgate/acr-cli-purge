@@ -2,11 +2,6 @@ FROM alpine:latest
 
 ENV ACR_CLI_VERSION=0.11
 
-RUN apk add --no-cache shadow
-
-RUN groupadd -r acruser && useradd -r -g acruser acruser
-
-WORKDIR /home/acruser
 RUN chown acruser:acruser /home/acruser
 
 RUN echo "Installing acr-cli version $ACR_CLI_VERSION" \
@@ -20,7 +15,5 @@ RUN echo "Installing acr-cli version $ACR_CLI_VERSION" \
 COPY entrypoint.sh /home/acruser/entrypoint.sh
 RUN chmod +x /home/acruser/entrypoint.sh \
     && chown acruser:acruser /home/acruser/entrypoint.sh
-
-USER acruser
 
 ENTRYPOINT ["/home/acruser/entrypoint.sh"]
