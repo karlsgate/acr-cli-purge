@@ -49,7 +49,16 @@ jobs:
 | `repo`            | The name of the ACR repository to clean up (default: 'all')                                                  |
 | `tag_regex`       | A regex pattern to match tags for deletion (default: `.*`)                                                   |
 | `repo_regex`      | A regex pattern to match repositories for deletion (only used if `repo` is not specified; default: `.*`)     |
-| `ago`             | The time granularity to retain tags (default: 30d which is 30 days)                                          |
+| `ago`             | The time granularity to retain tags (default: 30d). Uses a shorthand time format: <number><unit>             |
+|                   | Unit can be:                                                                                                 |
+|                   | - 's' (seconds)                                                                                              |
+|                   | - 'm' (minutes)                                                                                              |
+|                   | - 'h' (hours)                                                                                                |
+|                   | - 'd' (days)                                                                                                 |
+|                   | - 'w' (weeks)                                                                                                |
+|                   | - 'M' (months)                                                                                               |
+|                   | - 'y' (years)                                                                                                |
+|                   | Examples: '30d' for 30 days, '2w' for 2 weeks, '6h' for 6 hours.                                             |
 | `keep`            | The number of tags to keep, even if they meet the deletion criteria (default: 3)                             |
 | `dry_run`         | If set to `true`, the action will only print the tags that would be deleted (default: `false`)               |
 | `delete_untagged` | If set to `true`, the action will delete untagged manifests (default: `false`)                               |
