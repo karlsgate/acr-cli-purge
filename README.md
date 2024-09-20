@@ -20,7 +20,7 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-        
+
       - name: ACR Purge
         uses: karlsgate/acr-cli-purge@v1
         with:
@@ -86,7 +86,7 @@ This configuration will:
 - Delete tags older than 30 days
 - Always keep at least 5 tags, even if they're older than 30 days
 
-### Example 2: Cleanup with Tag Pattern
+#### Example 2: Cleanup with Tag Pattern
 
 ```yaml
 - uses: karlsgate/acr-cli-purge@v1
@@ -106,7 +106,7 @@ This configuration will:
 - Delete matching tags older than 90 days
 - Always keep at least 10 tags that match the pattern, even if they're older than 90 days
 
-### Example 3: Multi-Repository Cleanup
+#### Example 3: Multi-Repository Cleanup
 
 ```yaml
 - uses: karlsgate/acr-cli-purge@v1
@@ -128,7 +128,7 @@ This configuration will:
 - Always keep at least 3 tags in each repository that match the criteria
 - Delete untagged manifests in the matching repositories
 
-### Example 4: Aggressive Cleanup with Safeguards
+#### Example 4: Aggressive Cleanup with Safeguards
 
 ```yaml
 - uses: karlsgate/acr-cli-purge@v1
@@ -150,7 +150,7 @@ This configuration will:
 - Always keep at least 20 tags in each repository
 - Run in dry-run mode to prevent actual deletions
 
-### Example 5: Cleanup of Specific Version Pattern
+#### Example 5: Cleanup of Specific Version Pattern
 
 ```yaml
 - uses: karlsgate/acr-cli-purge@v1
