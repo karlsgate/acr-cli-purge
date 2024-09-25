@@ -50,16 +50,8 @@ jobs:
 | `repo`    | The name of the ACR repository to clean up (default: 'all')    |
 | `tag_regex`    | A regex pattern to match tags for deletion (default: `.*`). This is an inclusive filter, meaning it will delete tags that match the pattern. For example, `^v[0-9]+\.[0-9]+\.[0-9]+$` would match semantic version tags like 'v1.2.3'. |
 | `repo_regex`    | A regex pattern to match repositories for deletion (only used if `repo` is not specified; default: `.*`). This is an inclusive filter, meaning it will delete repositories that match the pattern. For example, `^myapp-.*$` would match repositories starting with 'myapp-'. |
-| `ago`    | The time granularity to retain tags (default: 30d). This flag specifies how far back in time to consider tags for deletion. Tags created before this time will be eligible for deletion. Uses a shorthand time format: <number><unit> |
-|    | Unit can be:    |
-|    | - 's' (seconds)    |
-|    | - 'm' (minutes)    |
-|    | - 'h' (hours)    |
-|    | - 'd' (days)    |
-|    | - 'w' (weeks)    |
-|    | - 'M' (months)    |
-|    | - 'y' (years)    |
-|    | Examples: '30d' for 30 days, '2w' for 2 weeks, '6h' for 6 hours.    |
+| `ago`    | The time granularity to retain tags (default: 30d). This flag specifies how far back in time to consider tags for deletion. Tags created before this time will be eligible for deletion. The duration string follows Go-style formatting, which is a possibly signed sequence of decimal numbers with an optional fraction and a unit suffix. Valid units are: ns (nanoseconds), us or µs (microseconds), ms (milliseconds), s (seconds), m (minutes), h (hours), and d (days). |
+|    | Examples: 30d for 30 days, 2h45m for 2 hours and 45 minutes, 1.5h for 1.5 hours.   |
 | `keep`    | The number of most recently created tags to retain, even if they meet the deletion criteria (default: 3). This ensures that a minimum number of recent tags are always kept, regardless of their age or pattern matching. |
 | `dry_run`    | If set to `true`, the action will only print the tags that would be deleted without actually deleting them (default: `false`)    |
 | `delete_untagged` | If set to `true`, the action will delete untagged manifests (default: `false`)    |

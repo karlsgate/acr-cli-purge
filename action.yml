@@ -27,7 +27,18 @@ inputs:
     required: false
     default: '.*'
   ago:
-    description: 'The number of days to keep tags. Default is 30 days (30d)'
+    description: |        
+        The duration to retain tags before purging. Use Go-style duration format:
+        - 'ns' (nanoseconds)
+        - 'us' or 'µs' (microseconds)
+        - 'ms' (milliseconds)
+        - 's' (seconds)
+        - 'm' (minutes)
+        - 'h' (hours)
+        - 'd' (days)
+        Example: '30m', '2h45m', '1d2h', etc.
+        Default is '30d'.
+    required: false
     default: '30d'
   keep:
     description: 'The number of tags to keep even if they meet the criteria. Default is 3' 

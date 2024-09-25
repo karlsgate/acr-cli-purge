@@ -8,6 +8,27 @@ log_error_and_exit() {
   exit 1
 }
 
+validate_ago() {
+  local input="$1"
+
+  # Valid units for Go durations
+  local component_regex='^[0-9]+(d|h|m|s|ms|us|µs|ns)$'
+
+  while [ -n "$input" ]; do
+    if echo "$input" | grep -qE '^([0-9]+(d|h|m|s|ms|us|µs|ns))'; then
+      component=$(echo "$input" | grep -oE '^[0-9]+(d|h|m|s|ms|us|µs|ns)')
+
+      input=$(echo "$input" | sed "s/^$component//")
+
+      if ! echo "$component" | grep -Eq "$component_regex"; then
+        log_error_and_exit "Invalid duration component: $component. Please use valid Go duration format (e.g., '30m', '2h45m', '1d2h', etc.)."
+      fi
+    else
+      log_error_and_exit "Invalid duration format: $input. Please use valid Go duration format."
+    fi
+  done
+}
+
 # Validate required inputs
 [ -z "${INPUT_REGISTRY}" ] && log_error_and_exit "Registry input is required"
 [ -z "${INPUT_USERNAME}" ] && log_error_and_exit "Username input is required"
@@ -21,6 +42,9 @@ AGO="${INPUT_AGO:-30d}"
 KEEP="${INPUT_KEEP:-3}"
 DRY_RUN="${INPUT_DRY_RUN:-false}"
 DELETE_UNTAGGED="${INPUT_DELETE_UNTAGGED:-false}"
+
+# Validate the AGO input
+validate_ago "$AGO"
 
 # Determine whether to use REPO or REPO_REGEX
 if [ -n "$REPO" ]; then
