@@ -62,13 +62,23 @@ fi
 # Run the acr-cli command with error handling
 echo "Starting ACR cleanup for registry ${INPUT_REGISTRY}..."
 
-if ! acr purge -r "$INPUT_REGISTRY" \
+OUTPUT=$(acr purge -r "$INPUT_REGISTRY" \
     --ago "$AGO" \
     --keep "$KEEP" \
     --filter "$FILTER" \
     $( [ "$DRY_RUN" = true ] && echo "--dry-run" ) \
-    $( [ "$DELETE_UNTAGGED" = true ] && echo "--untagged" ); then
+    $( [ "$DELETE_UNTAGGED" = true ] && echo "--untagged" ))
+
+if [ $? -ne 0 ]; then
   log_error_and_exit "Failed to execute ACR cleanup"
 fi
+
+echo "$OUTPUT"
+
+TAGS_DELETED=$(echo "$OUTPUT" | grep -E 'Number of (tags to be deleted|deleted tags):')
+MANIFESTS_DELETED=$(echo "$OUTPUT" | grep -E 'Number of (manifests to be deleted|deleted manifests):')
+
+echo "$TAGS_DELETED" >> $GITHUB_STEP_SUMMARY
+echo "$MANIFESTS_DELETED" >> $GITHUB_STEP_SUMMARY
 
 echo "ACR cleanup completed successfully."
