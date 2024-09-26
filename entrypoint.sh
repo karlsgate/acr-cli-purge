@@ -75,6 +75,7 @@ fi
 
 echo "$OUTPUT"
 
+echo "## 📄🧹 ACR Cleanup Summary for $INPUT_REGISTRY" >> $GITHUB_STEP_SUMMARY
 TAGS_DELETED=$(echo "$OUTPUT" | grep -E 'Number of (tags to be deleted|deleted tags):')
 MANIFESTS_DELETED=$(echo "$OUTPUT" | grep -E 'Number of (manifests to be deleted|deleted manifests):')
 
